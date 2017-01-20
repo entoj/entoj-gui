@@ -1,0 +1,48 @@
+.view.examples
+{
+    background-color: #888;
+
+    .content-container
+    {
+        padding: 0;
+        margin: 0;
+    }
+
+    .view
+    {
+        position: absolute;
+        top: 31px;
+        left: 50%;
+        transform: translateX(-50%);
+        border: none;
+        width: 100%;
+        height: calc(100% - 31px);
+        box-shadow: 6px 6px 32px 0px rgba(0,0,0,0.29) !important;
+    }
+
+    .content-navigation
+    {
+        .dropdown.selection
+        {
+            z-index: +1;
+            position: relative;
+
+            border: none;
+
+            i.icon
+            {
+                margin-top: 0.3rem;
+            }
+        }
+
+        .dropdown.device.selection
+        {
+            min-width: 4em;
+        }
+
+        .item.open
+        {
+            padding-right: 0.9em;
+        }
+    }
+}

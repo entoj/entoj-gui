@@ -1,0 +1,19 @@
+
+{% macro site_card(model, global) %}
+
+    {# Prepare #}
+    {# Render #}
+    <div class="site">
+        <div class="ui raised card">
+            <div class="content">
+                <div class="header">{{ model.name }}</div>
+                <div class="description">{{ model.documentation.getFirstByType(global.type.DocumentationText).description|markdown }}</div>
+            </div>
+            <div class="buttons content">
+                <a href="{{ global.urls.resolveSite(model) }}" class="ui compact mini blue button">Show</a>
+            </div>
+        </div>
+    </div>
+
+{% endmacro %}
+

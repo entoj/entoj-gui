@@ -1,0 +1,109 @@
+{% macro entity_menu(global) %}
+
+    {# Prepare #}
+    {# Render #}
+    <div class="ui left icon mini search input">
+        <input type="text" placeholder="Search entity...">
+        <i class="search icon"></i>
+    </div>
+    <div class="item seperator"></div>
+    <a class="pointing browse item">
+        States
+        <i class="dropdown icon"></i>
+    </a>
+    <div class="ui flowing basic state popup">
+        <div class="ui three column relaxed divided grid">
+            <div class="column">
+                <h4 class="ui header">Concept</h4>
+                <div class="ui mini link concept list">
+                    <a class="item selected">None</a>
+                    <a class="item selected">Progress</a>
+                    <a class="item selected">Review</a>
+                    <a class="item selected">Done</a>
+                </div>
+            </div>
+            <div class="column">
+                <h4 class="ui header">Frontend</h4>
+                <div class="ui mini link frontend list">
+                    <a class="item selected">None</a>
+                    <a class="item selected">Progress</a>
+                    <a class="item selected">Review</a>
+                    <a class="item selected">Done</a>
+                </div>
+            </div>
+            <div class="column">
+                <h4 class="ui mini header">Integration</h4>
+                <div class="ui mini link integration list">
+                    <a class="item selected">None</a>
+                    <a class="item selected">Progress</a>
+                    <a class="item selected">Review</a>
+                    <a class="item selected">Done</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endmacro %}
+
+
+{% macro entity_card(model, global) %}
+
+    {# Prepare #}
+    {% set hasExamples = false %}
+    {% if model.id.category.longName == 'Page' %}
+        {% set hasExamples = true %}
+    {% else %}
+        {% if model.documentation.getByContentKind(global.kind.EXAMPLE)|length > 0 %}
+            {% set hasExamples = true %}
+        {% endif %}
+    {% endif %}
+
+    {# Render #}
+    <div class="entity type-{{ model.id.category.shortName }}">
+        <div class="ui raised card">
+            <div class="content">
+                <div class="header">{{ model.id.asString() }}</div>
+                <div class="description">{{ model.documentation.getFirstByType(global.type.DocumentationText).description|markdown }}</div>
+            </div>
+            <div class="states content">
+                <div class="state concept {{ model.properties.state.concept|default('')|lower }}">
+                    <span class="name">Konzept</span>
+                    <span class="value">{{ model.properties.state.concept|default('None') }}</span>
+                </div>
+                <div class="state frontend {{ model.properties.state.frontend|default('')|lower }}">
+                    <span class="name">Frontend</span>
+                    <span class="value">{{ model.properties.state.frontend|default('None')|lower }}</span>
+                </div>
+                <div class="state integration {{ model.properties.state.integration|default('')|lower }}">
+                    <span class="name">Integration</span>
+                    <span class="value">{{ model.properties.state.integration|default('None')|lower }}</span>
+                </div>
+            </div>
+            <div class="buttons content">
+                <a href="{{ global.urls.resolveEntityId(model.id, '/documentation') }}" class="ui compact mini button">Documentation</a>
+                {% if hasExamples %}
+                    <a href="{{ global.urls.resolveEntityId(model.id, '/examples') }}" class="ui compact mini blue button">Examples</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro entity_category(model, global) %}
+
+    {# Prepare #}
+    {% set entities = global.entities.getBySiteAndCategory(global.location.site, model) %}
+
+    {# Render #}
+    {% if entities.length > 0 %}
+        <div class="entitycategory">
+            <div class="ui large header">{{ model.pluralName }}</div>
+            <div class="items">
+                {% for entity in entities %}
+                    {{ entity_card(model=entity, global=global) }}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endmacro %}

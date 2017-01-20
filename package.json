@@ -1,0 +1,17 @@
+{
+  "name": "entoj-gui",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=4.x"
+  },
+  "dependencies": {
+    "entoj-core": "*"
+  },
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-sass": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-autoprefixer": "*",
+    "semantic-ui": "*"
+  }
+}

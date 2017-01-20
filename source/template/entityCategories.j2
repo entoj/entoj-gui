@@ -1,0 +1,23 @@
+{# Requirements #}
+{% from "macro/entity.j2" import entity_menu, entity_card, entity_category %}
+
+{# Render #}
+{% extends "./layout/default.j2" %}
+
+{% block name %}All Entities{% endblock %}
+{% block type %}entities{% endblock %}
+{% block menu %}
+    {{ entity_menu(global) }}
+{% endblock %}
+{% block content %}
+    <div class="entities">
+        {% for entityCategory in global.entityCategories.getItems() %}
+            {% if entityCategory.isGlobal == false %}
+                {{ entity_category(model=entityCategory, global=global) }}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block bottom %}
+    <script src="/_/js/entity.js"></script>
+{% endblock %}

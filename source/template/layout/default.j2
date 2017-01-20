@@ -1,0 +1,53 @@
+{# Requirements #}
+{% from '/macro/navigation.j2' import main_navigation %}
+
+{# Render #}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>{% block name %}{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="/_/semantic/semantic.css">
+        <link rel="stylesheet" type="text/css" href="/_/css/entoj-gui.css">
+        <script src="/_/js/jquery-3.1.1.js"></script>
+        <script src="/_/semantic/semantic.js"></script>
+    </head>
+    <body class="view {% block type %}{% endblock %} collapsed">
+
+        {{ main_navigation(global=global) }}
+
+        <div class="main-container">
+            <div class="content-navigation">
+                <div class="ui mini menu">
+                    <a class="item toggle-main" href="JavaScript:;">
+                        <i class="angle double left icon"></i>
+                    </a>
+                    {% block menu %}{% endblock %}
+                </div>
+            </div>
+            <div class="content-container">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+
+        {% block bottom %}{% endblock %}
+
+        <script>
+            $(document).ready(function()
+            {
+                // Menu Toogle
+                $('.content-navigation .toggle-main').on('click', function(e)
+                {
+                    $('.view').toggleClass('collapsed');
+                    $('.content-navigation .toggle-main .icon').toggleClass('content angle double left');
+                });
+
+                // Components
+                $('select.dropdown').dropdown();
+                $('.ui.dropdown select').dropdown();
+            });
+        </script>
+    </body>
+</html>

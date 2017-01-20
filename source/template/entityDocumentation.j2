@@ -1,0 +1,20 @@
+{# Requirements #}
+{# Render #}
+{% extends "./layout/default.j2" %}
+{% block name %}{{ global.location.entity.id.asString() }} Documentation{% endblock %}
+{% block type %}documentation{% endblock %}
+{% block menu %}
+    <a href="{{ global.urls.resolveEntityId(global.location.entity.id, '/examples') }}" class="navigation examples" data-tooltip="Show examples" data-position="bottom left">
+        <i class="desktop icon"></i>
+    </a>
+    <div class="navigation documentation active">
+        <i class="file text outline icon"></i>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="documentation">
+        {{ global.location.entity.documentation.getFirstByType(global.type.DocumentationText)|markdown }}
+    </div>
+{% endblock %}
+{% block bottom %}
+{% endblock %}

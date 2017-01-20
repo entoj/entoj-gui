@@ -1,0 +1,79 @@
+{# Requirements #}
+
+{# Render #}
+{% extends "./layout/default.j2" %}
+
+{% block name %}{{ global.location.entity.id.asString() }} Examples{% endblock %}
+{% block type %}examples{% endblock %}
+{% block menu %}
+    <div class="navigation examples active">
+        <i class="desktop icon"></i>
+    </div>
+    <a class="navigation documentation" href="{{ global.urls.resolveEntityId(global.location.entity.id, '/documentation') }}" data-tooltip="Show documentation" data-position="bottom left">
+        <i class="file text outline icon"></i>
+    </a>
+
+    <div class="right menu">
+        <select class="ui item example dropdown">
+            {% if global.location.entity.id.category.longName == 'Page' %}
+                <option value="{{ global.urls.resolveEntityId(global.location.entity.id, '/' + global.location.entity.id.asString() + '.j2') }}">Page</option>
+            {% else %}
+                {% for example in global.location.entity.documentation.getByContentKind(global.kind.EXAMPLE) %}
+                    <option value="{{ global.urls.resolveEntityId(global.location.entity.id, '/examples/' + example.file.basename) }}">{{ example.name }}</option>
+                {% endfor %}
+            {% endif %}
+        </select>
+
+        <select class="ui item device dropdown">
+            <option value="100%">Full</option>
+            <option value="320px">XS</small></option>
+            <option value="480px">S</option>
+            <option value="768px">M</option>
+            <option value="1024px">L</option>
+            <option value="1280px">XL</option>
+        </select>
+
+        <a class="item open" href="JavaScript:;">
+            <i class="external icon"></i>
+        </a>
+    </div>
+{% endblock %}
+{% block content %}
+    <iframe class="view" src="about:blank"></iframe>
+{% endblock %}
+{% block bottom %}
+    <script>
+        $(document).ready(function()
+        {
+            $('select.dropdown').dropdown();
+
+            // Url
+            $('.dropdown.example select').on('change', function(e)
+            {
+                $('iframe.view').attr('src', $(this).val());
+            });
+
+            // Size
+            $('.dropdown.device select').on('change', function(e)
+            {
+                if (!$(this).val())
+                {
+                    $('iframe.view').css('width', '100%');
+                }
+                else
+                {
+                    $('iframe.view').css('width', $(this).val());
+                }
+            });
+
+            // Open
+            $('a.open').on('click', function(e)
+            {
+                window.open($('iframe.view').attr('src'));
+            });
+
+            // Open first url
+            $('.dropdown.example select').trigger('change');
+        });
+    </script>
+{% endblock %}

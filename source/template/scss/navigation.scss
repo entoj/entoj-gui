@@ -1,0 +1,115 @@
+.view
+{
+    /**
+     * Menu Toggle
+     */
+    .main-navigation
+    {
+        transform: translateX(0);
+        transition: transform 0.5s, box-shadow 0.5s;
+    }
+
+    .main-container
+    {
+        transition: left 0.5s;
+    }
+
+    &.collapsed
+    {
+        .fixed.main-navigation
+        {
+            transform: translateX(-15rem);
+            box-shadow: none !important;
+        }
+
+        .main-container
+        {
+            left: 0rem;
+        }
+    }
+
+
+    /**
+     * Main Navigation
+     */
+    .main-navigation
+    {
+        border-top: none !important;
+        border-bottom: none !important;
+        box-shadow: 6px 6px 32px 0px rgba(0,0,0,0.29) !important;
+        background-color: #303233 !important;
+
+        .project
+        {
+            color: rgba(255, 255, 255, 0.9);
+            background-color: #202223 !important;
+            padding: 1rem 0 1rem 0.75rem;
+            font-weight: 300;
+            margin-bottom: 0;
+            border-bottom: 1px solid #666;
+        }
+
+        .items > .item > .menu
+        {
+            margin-left: -0.4rem;
+        }
+    }
+
+
+    /**
+     * Content Navigation
+     */
+    .content-navigation
+    {
+        z-index: 102;
+
+        .menu
+        {
+            /*box-shadow: none;*/
+            border-radius: 0;
+            border: none;
+
+            .item.seperator
+            {
+                padding: 0;
+            }
+
+            .navigation.examples,
+            .navigation.documentation
+            {
+                border: none;
+                font-size: 1rem;
+                color: rgba(0, 0, 0, 0.2);
+                padding: 8px 0px 0 6px;
+
+                &:hover,
+                &.active
+                {
+                    color: rgba(0, 0, 0, 1);
+                }
+            }
+
+            .dropdown.selection
+            {
+                z-index: +1;
+                position: relative;
+                border: none;
+                min-width: 8em;
+
+                i.icon
+                {
+                    margin-top: 0.25rem;
+                }
+            }
+
+            .item.toggle-main
+            {
+                font-size: 1.8em;
+                padding: 0 0.1em 0 0.4em;
+                color: rgba(255, 255, 255, 0.9);
+                background-color: #202223 !important;
+                border-radius: 0;
+            }
+        }
+    }
+}

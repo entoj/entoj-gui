@@ -1,0 +1,145 @@
+
+.view.entities
+{
+    /**
+     * Content Nvaigation
+     */
+    .content-navigation
+    {
+        .search.input
+        {
+            margin: 4px 1.5em;
+            width: 100%;
+            max-width: 150px;
+        }
+
+
+        .state.popup
+        {
+            .header
+            {
+                font-size: 0.85rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .item.selected
+            {
+                font-weight: bold;
+                color: rgba(0, 0, 0, 0.9);
+            }
+        }
+    }
+
+
+    /**
+     * Entities
+     */
+    .entities
+    {
+        padding: 2rem 0 0 2rem;
+    }
+
+
+    .entitycategory
+    {
+        margin-bottom: 1.5rem;
+
+        & > .items
+        {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+
+
+    .entity
+    {
+        min-width: 18.7rem;
+        max-width: 23.7rem;
+        width: 32%;
+        padding: 0 2rem 2rem 0;
+        box-sizing: border-box;
+
+        &.type-m
+        {
+            .card
+            {
+            }
+        }
+
+        .card
+        {
+            margin: 0 !important;
+            width: 100% !important;
+
+            .buttons.content
+            {
+                padding-bottom: 0.5rem;
+                text-align: right;
+                background-color: #F5F5F5;
+                border: 1px solid rgba(34, 36, 38, 0.15);
+
+                .button
+                {
+                    margin-bottom: 0.5rem;
+                }
+            }
+
+            .states.content
+            {
+                padding: 0;
+                display: flex;
+                border-top: 1px solid rgba(34, 36, 38, 0.15);
+
+                .state
+                {
+                    padding: 0.5em 1em;
+                    flex: 1;
+                    border-left: 1px solid rgba(34, 36, 38, 0.15);
+                    background-color: #FEE7EA;
+
+                    &:first-child
+                    {
+                        border-left: none;
+                    }
+
+                    .name
+                    {
+                        font-size: 80%;
+                        font-weight: bold;
+                        display: block;
+                        line-height: 1;
+                    }
+
+                    .value
+                    {
+                        font-size: 70%;
+                        display: block;
+                        line-height: 1;
+                    }
+
+                    &.done
+                    {
+                        background-color: #C8FFD8;
+                    }
+
+                    &.progress
+                    {
+                        background-color: #FFE5BE;
+                    }
+
+                    &.review
+                    {
+                        background-color: #FFFFC4;
+                    }
+
+                }
+            }
+
+            &:last-child
+            {
+                /*margin-bottom: 2rem;*/
+            }
+        }
+    }
+}

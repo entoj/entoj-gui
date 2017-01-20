@@ -1,0 +1,8 @@
+/*******************************
+     User Global Variables
+*******************************/
+@fontName: "Roboto";
+@pageFont: "Roboto";
+@importGoogleFonts: false;
+@fontWeight: 300;
+@headerFontWeight: bold;
