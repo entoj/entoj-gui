@@ -8,21 +8,23 @@
     <div class="ui left fixed vertical inverted main-navigation menu">
         <h1 class="project">entoj</h1>
         <div class="items">
-            <div class="item"><i class="cubes icon"></i>Entities
-                <div class="menu">
-                    <a href="{{ global.urls.resolveSite(global.location.site) }}" class="item {% if isSite %}active{% endif %}">All</a>
-                    {% for entityCategory in global.entityCategories.getItems() %}
-                        {% if entityCategory.isGlobal == false %}
-                            <a href="{{ global.urls.resolveEntityCategory(global.location.site, entityCategory) }}" class="item {% if isCategory and entityCategory == global.location.entityCategory %}active{% endif %}">
-                                {{ entityCategory.pluralName }}
-                            </a>
-                        {% endif %}
-                    {% endfor %}
+            {% if global.location.site %}
+                <div class="item"><i class="cubes icon"></i>Entities
+                    <div class="menu">
+                        <a href="{{ global.urls.resolveSite(global.location.site) }}" class="item {% if isSite %}active{% endif %}">All</a>
+                        {% for entityCategory in global.entityCategories.getItems() %}
+                            {% if entityCategory.isGlobal == false %}
+                                <a href="{{ global.urls.resolveEntityCategory(global.location.site, entityCategory) }}" class="item {% if isCategory and entityCategory == global.location.entityCategory %}active{% endif %}">
+                                    {{ entityCategory.pluralName }}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
-            <a class="item"><i class="bug icon"></i>Tests</a>
+                <a class="item"><i class="bug icon"></i>Tests</a>
+                <a class="item"><i class="eyedropper icon"></i>Styleguide</a>
+            {% endif %}
             <a class="item"><i class="file text outline icon"></i>Documentation</a>
-            <a class="item"><i class="eyedropper icon"></i>Styleguide</a>
         </div>
     </div>
 {% endmacro %}

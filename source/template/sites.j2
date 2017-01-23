@@ -6,4 +6,9 @@
 {% block name %}Sites{% endblock %}
 {% block type %}sites{% endblock %}
 {% block content %}
+    <div class="sites">
+        {% for site in global.sites.getItems() %}
+            {{ site_card(model=site, global=global) }}
+        {% endfor %}
+    </div>
 {% endblock %}
