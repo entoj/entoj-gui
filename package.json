@@ -5,7 +5,7 @@
     "node": ">=4.x"
   },
   "dependencies": {
-    "entoj-core": "git+https://github.com/entoj/entoj-core.git"
+    "entoj-core": "*"
   },
   "devDependencies": {
     "gulp": "*",
