@@ -61,6 +61,10 @@ class GuiPagesRoute extends PagesRoute
             {
                 url: '/:site/:entityCategory/:entityId/documentation',
                 template: 'entityDocumentation.j2'
+            },
+            {
+                url: '/:site/:entityCategory/:entityId/datamodel/:modelFile',
+                template: 'entityDataModel.j2'
             }
         ];
         const options =

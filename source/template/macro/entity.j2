@@ -57,6 +57,10 @@
             {% set hasExamples = true %}
         {% endif %}
     {% endif %}
+    {% set hasDatamodel = false %}
+    {% if model.documentation.getByContentKind(global.kind.DATAMODEL)|length > 0 %}
+        {% set hasDatamodel = true %}
+    {% endif %}
 
     {# Render #}
     <div class="entity type-{{ model.id.category.shortName }}">
@@ -81,6 +85,9 @@
             </div>
             <div class="buttons content">
                 <a href="{{ global.urls.resolveEntityId(model.id, '/documentation') }}" class="ui compact mini button">Documentation</a>
+                {% if hasDatamodel %}
+                    <a href="{{ global.urls.resolveEntityId(model.id, '/datamodel/' + model.documentation.getFirstByContentKind(global.kind.DATAMODEL).file.basename) }}" class="ui compact mini button">Datamodel</a>
+                {% endif %}
                 {% if hasExamples %}
                     <a href="{{ global.urls.resolveEntityId(model.id, '/examples') }}" class="ui compact mini blue button">Examples</a>
                 {% endif %}
