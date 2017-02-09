@@ -4,7 +4,7 @@
 {% block name %}{{ global.location.entity.id.asString() }} Datamodel{% endblock %}
 {% block type %}datamodel{% endblock %}
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="/_/css/highlight-styles/dracula.css">
+    <link rel="stylesheet" type="text/css" href="/_/css/jsoneditor.min.css">
 {% endblock %}
 {% block menu %}
     <a href="{{ global.urls.resolveEntityId(global.location.entity.id, '/examples') }}" class="navigation examples" data-tooltip="Show examples" data-position="bottom left">
@@ -20,7 +20,7 @@
         <select class="ui item datamodel dropdown">
 
             {% for datamodel in global.location.entity.documentation.getByContentKind(global.kind.DATAMODEL) %}
-                <option value="{{ global.urls.resolveEntityId(global.location.entity.id, '/datamodel/' + datamodel.file.basename) }}">{{ datamodel.file.basename }}</option>
+                <option {% if datamodel.file.basename == global.location.modelFile %}selected="selected"{% endif %} value="{{ global.urls.resolveEntityId(global.location.entity.id, '/datamodel/' + datamodel.file.basename) }}">{{ datamodel.file.basename }}</option>
             {% endfor %}
         </select>
     </div>
@@ -28,12 +28,14 @@
 {% block content %}
 
     <div class="datamodel-content">
-{#      #}{{  global.urls.resolveEntityId(global.location.entity.id, '/models/' + global.location.modelFile)|load|prettyjson  }}
+        <div class="datamodel-content__rawjson">
+{#          #}{{  global.urls.resolveEntityId(global.location.entity.id, '/models/' + global.location.modelFile)|load|prettyjson  }}
+        </div>
     </div>
 
 {% endblock %}
 {% block bottom %}
-    <script type="text/javascript" src="/_/js/highlight.pack.js"></script>
+    <script type="text/javascript" src="/_/js/jsoneditor.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function()
         {
@@ -45,7 +47,22 @@
                 window.location = $(this).val();
             });
 
-            hljs.highlightBlock($('.datamodel-content').get(0));
+            var editor = new JSONEditor(
+                $('.datamodel-content').get(0),
+                {
+                    "indentation": 4,
+                    mode: "view",
+                    modes: [ 'view', 'text']
+                }
+            );
+
+            // Enables JSONEditor
+            var json = {{ global.urls.resolveEntityId(global.location.entity.id, '/models/' + global.location.modelFile)|load|prettyjson }};
+            editor.set(json);
+            editor.setName("{{ global.location.modelFile }}");
+            editor.expandAll();
+
+            $('.datamodel-content__rawjson').hide();
 
         });
     </script>
