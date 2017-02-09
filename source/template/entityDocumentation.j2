@@ -17,9 +17,13 @@
     {% endif %}
 {% endblock %}
 {% block content %}
-    <div class="documentation">
-        {{ global.location.entity.documentation.getFirstByType(global.type.DocumentationText)|markdown }}
-    </div>
+    {% if global.location.entity.properties.documentation.confluence %}
+        <iframe class="external documentation" src="{{ global.location.entity.properties.documentation.confluence }}"/>
+    {% else %}
+        <div class="internal documentation">
+            {{ global.location.entity.documentation.getFirstByType(global.type.DocumentationText)|markdown }}
+        </div>
+    {% endif %}
 {% endblock %}
 {% block bottom %}
 {% endblock %}
