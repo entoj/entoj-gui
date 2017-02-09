@@ -3,7 +3,7 @@
 {
     .content-container
     {
-        .documentation
+         .internal.documentation
         {
             margin: 2rem auto;
             width: 80%;
@@ -13,6 +13,16 @@
             {
                 width: 100%;
             }
+        }
+
+        .external.documentation
+        {
+            position: absolute;
+            top: 31px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     }
 }
