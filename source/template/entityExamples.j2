@@ -12,6 +12,11 @@
     <a class="navigation documentation" href="{{ global.urls.resolveEntityId(global.location.entity.id, '/documentation') }}" data-tooltip="Show documentation" data-position="bottom left">
         <i class="file text outline icon"></i>
     </a>
+    {% if global.location.entity.documentation.getByContentKind(global.kind.DATAMODEL)|length > 0 %}
+    <a href="{{ global.urls.resolveEntityId(global.location.entity.id, '/datamodel/' + global.location.entity.documentation.getFirstByContentKind(global.kind.DATAMODEL).file.basename ) }}" class="navigation datamodel" data-tooltip="Show datamodel" data-position="bottom left">
+        <i class="terminal icon"></i>
+    </a>
+    {% endif %}
 
     <div class="right menu">
         <select class="ui item example dropdown">
@@ -26,7 +31,7 @@
 
         <select class="ui item device dropdown">
             <option value="100%">Full</option>
-            <option value="320px">XS</small></option>
+            <option value="320px">XS</option>
             <option value="480px">S</option>
             <option value="768px">M</option>
             <option value="1024px">L</option>
