@@ -9,6 +9,11 @@
             width: 80%;
             max-width: 1200px;
             white-space: pre;
+
+            .jsoneditor-outer > * {
+                min-height: 800px;
+            }
+
         }
     }
 }
