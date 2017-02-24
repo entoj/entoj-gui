@@ -5,15 +5,12 @@
     {
         .datamodel-content
         {
-            margin: 2rem auto;
-            width: 80%;
-            max-width: 1200px;
-            white-space: pre;
-
-            .jsoneditor-outer > * {
-                min-height: 800px;
-            }
-
+            position: absolute;
+            top: 4rem;
+            left: 2rem;
+            right: 2rem;
+            bottom: 2rem;
+            margin: 0;
         }
     }
 }

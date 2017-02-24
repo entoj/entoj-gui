@@ -18,7 +18,6 @@
     </div>
     <div class="right menu">
         <select class="ui item datamodel dropdown">
-
             {% for datamodel in global.location.entity.documentation.getByContentKind(global.kind.DATAMODEL) %}
                 <option {% if datamodel.file.basename == global.location.modelFile %}selected="selected"{% endif %} value="{{ global.urls.resolveEntityId(global.location.entity.id, '/datamodel/' + datamodel.file.basename) }}">{{ datamodel.file.basename }}</option>
             {% endfor %}
@@ -26,13 +25,11 @@
     </div>
 {% endblock %}
 {% block content %}
-
     <div class="datamodel-content">
         <div class="datamodel-content__rawjson">
-{#          #}{{  global.urls.resolveEntityId(global.location.entity.id, '/models/' + global.location.modelFile)|load|prettyjson  }}
+            {{ global.urls.resolveEntityId(global.location.entity.id, '/models/' + global.location.modelFile)|load|prettyjson }}
         </div>
     </div>
-
 {% endblock %}
 {% block bottom %}
     <script type="text/javascript" src="/_/js/jsoneditor.min.js"></script>
@@ -40,6 +37,7 @@
         $(document).ready(function()
         {
             $('select.dropdown').dropdown();
+            var data = '{{ global.urls.resolveEntityId(global.location.entity.id, '/models/' + global.location.modelFile)|load|dump }}';
 
             // Url
             $('.dropdown.datamodel select').on('change', function(e)
