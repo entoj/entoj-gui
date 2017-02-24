@@ -47,6 +47,7 @@
         & > .items
         {
             display: flex;
+            flex-direction: row;
             flex-wrap: wrap;
         }
     }
@@ -56,7 +57,7 @@
     {
         min-width: 18.7rem;
         max-width: 23.7rem;
-        width: 32%;
+        flex: 1 1 18.7rem;
         padding: 0 2rem 2rem 0;
         box-sizing: border-box;
 
