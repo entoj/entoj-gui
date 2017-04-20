@@ -4,8 +4,9 @@
   "engines": {
     "node": ">=4.x"
   },
+  "main": "source/index.js",
   "dependencies": {
-    "entoj-core": "*"
+    "entoj-system": "*"
   },
   "devDependencies": {
     "gulp": "*",

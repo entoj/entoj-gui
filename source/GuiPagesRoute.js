@@ -4,16 +4,16 @@
  * Requirements
  * @ignore
  */
-const PagesRoute = require('entoj-core/source/server/routes/PagesRoute.js').PagesRoute;
-const UrlsConfiguration = require('entoj-core/source/model/configuration/UrlsConfiguration.js').UrlsConfiguration;
-const GlobalConfiguration = require('entoj-core/source/model/configuration/GlobalConfiguration.js').GlobalConfiguration;
-const PathesConfiguration = require('entoj-core/source/model/configuration/PathesConfiguration.js').PathesConfiguration;
-const BuildConfiguration = require('entoj-core/source/model/configuration/BuildConfiguration.js').BuildConfiguration;
-const EntitiesRepository = require('entoj-core/source/model/entity/EntitiesRepository.js').EntitiesRepository;
-const EntityCategoriesRepository = require('entoj-core/source/model/entity/EntityCategoriesRepository.js').EntityCategoriesRepository;
-const SitesRepository = require('entoj-core/source/model/site/SitesRepository.js').SitesRepository;
-const CliLogger = require('entoj-core/source/cli/CliLogger.js').CliLogger;
-const Environment = require('entoj-core/source/nunjucks/Environment.js').Environment;
+const PagesRoute = require('entoj-system').server.routes.PagesRoute;
+const UrlsConfiguration = require('entoj-system').model.configuration.UrlsConfiguration;
+const GlobalConfiguration = require('entoj-system').model.configuration.GlobalConfiguration;
+const PathesConfiguration = require('entoj-system').model.configuration.PathesConfiguration;
+const BuildConfiguration = require('entoj-system').model.configuration.BuildConfiguration;
+const EntitiesRepository = require('entoj-system').model.entity.EntitiesRepository;
+const EntityCategoriesRepository = require('entoj-system').model.entity.EntityCategoriesRepository;
+const SitesRepository = require('entoj-system').model.site.SitesRepository;
+const CliLogger = require('entoj-system').cli.CliLogger;
+const Environment = require('entoj-system').nunjucks.Environment;
 const path = require('path');
 
 
