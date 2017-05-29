@@ -61,26 +61,27 @@
     {% if model.documentation.getByContentKind(global.kind.DATAMODEL)|length > 0 %}
         {% set hasDatamodel = true %}
     {% endif %}
+    {% set state = model.properties.get('state') %}
 
     {# Render #}
     <div class="entity type-{{ model.id.category.shortName }}">
         <div class="ui raised card">
             <div class="content">
-                <div class="header">{{ model.id.asString() }}</div>
+                <div class="header">{{ model.idString }}</div>
                 <div class="description">{{ model.documentation.getFirstByType(global.type.DocumentationText).description|markdown }}</div>
             </div>
             <div class="states content">
-                <div class="state concept {{ model.properties.state.concept|default('')|lower }}">
+                <div class="state concept {{ state.concept|default('')|lower }}">
                     <span class="name">Konzept</span>
-                    <span class="value">{{ model.properties.state.concept|default('None') }}</span>
+                    <span class="value">{{ state.concept|default('None') }}</span>
                 </div>
-                <div class="state frontend {{ model.properties.state.frontend|default('')|lower }}">
+                <div class="state frontend {{ state.frontend|default('')|lower }}">
                     <span class="name">Frontend</span>
-                    <span class="value">{{ model.properties.state.frontend|default('None') }}</span>
+                    <span class="value">{{ state.frontend|default('None') }}</span>
                 </div>
-                <div class="state integration {{ model.properties.state.integration|default('')|lower }}">
+                <div class="state integration {{ state.integration|default('')|lower }}">
                     <span class="name">Integration</span>
-                    <span class="value">{{ model.properties.state.integration|default('None') }}</span>
+                    <span class="value">{{ state.integration|default('None') }}</span>
                 </div>
             </div>
             <div class="buttons content">
