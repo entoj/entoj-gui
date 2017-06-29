@@ -4,5 +4,5 @@
  */
 module.exports =
 {
-    GuiPagesRoute: require('./GuiPagesRoute.js').GuiPagesRoute
+    GuiTemplateRoute: require('./GuiTemplateRoute.js').GuiTemplateRoute
 };
