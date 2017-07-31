@@ -17,8 +17,9 @@
     {% endif %}
 {% endblock %}
 {% block content %}
-    {% if global.location.entity.properties.documentation.confluence %}
-        <iframe class="external documentation" src="{{ global.location.entity.properties.documentation.confluence }}"/>
+    {% set documentation = global.location.entity.properties.get('documentation') %}
+    {% if documentation && documentation.confluence %}
+        <iframe class="external documentation" src="{{ documentation.confluence }}"/>
     {% else %}
         <div class="internal documentation">
             {{ global.location.entity.documentation.getFirstByType(global.type.DocumentationText)|markdown }}
