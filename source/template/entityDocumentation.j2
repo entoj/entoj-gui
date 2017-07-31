@@ -18,7 +18,7 @@
 {% endblock %}
 {% block content %}
     {% set documentation = global.location.entity.properties.get('documentation') %}
-    {% if documentation && documentation.confluence %}
+    {% if documentation and documentation.confluence %}
         <iframe class="external documentation" src="{{ documentation.confluence }}"/>
     {% else %}
         <div class="internal documentation">
