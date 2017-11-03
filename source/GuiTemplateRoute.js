@@ -15,6 +15,7 @@ const SitesRepository = require('entoj-system').model.site.SitesRepository;
 const CliLogger = require('entoj-system').cli.CliLogger;
 const Environment = require('entoj-system').nunjucks.Environment;
 const path = require('path');
+const navigation = require('./navigation.js');
 
 
 /**
@@ -38,7 +39,7 @@ class GuiTemplateRoute extends BaseGuiTemplateRoute
     {
         const options =
         {
-            templateRoot: path.resolve(__dirname + '/template'),
+            templatePaths: path.resolve(__dirname + '/template'),
             staticRoute: '/_'
         };
         super(cliLogger.createPrefixed('gui'), sitesRepository, entityCategoriesRepository, entitiesRepository, globalConfiguration,
@@ -80,12 +81,11 @@ class GuiTemplateRoute extends BaseGuiTemplateRoute
             this.addTemplateHandler('/:site/:entityCategory/:entityId', 'entity.j2');
             this.addTemplateHandler('/:site/:entityCategory/:entityId/examples', 'entityExamples.j2');
             this.addTemplateHandler('/:site/:entityCategory/:entityId/documentation', 'entityDocumentation.j2');
-            //this.addTemplateHandler('/:site/:entityCategory/:entityId/datamodel/:modelFile', 'entityDataModel.j2');
 
             // Add static files
             const staticPath = (url) =>
             {
-                return path.join(this._templateRoot, url.substr(2));
+                return path.join(this.templatePaths[0], url.substr(2));
             };
             this.addStaticFileHandler('/_/*', staticPath, ['.png', '.js', '.css', '.woff', '.woff2']);
         });

@@ -7,13 +7,13 @@
 {% block name %}All Entities{% endblock %}
 {% block type %}entities{% endblock %}
 {% block menu %}
-    {{ entity_menu(global) }}
+    {{ entity_menu() }}
 {% endblock %}
 {% block content %}
     <div class="entities">
         {% for entityCategory in global.entityCategories.getItems() %}
             {% if entityCategory.isGlobal == false %}
-                {{ entity_category(model=entityCategory, global=global) }}
+                {{ entity_category(model=entityCategory) }}
             {% endif %}
         {% endfor %}
     </div>

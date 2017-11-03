@@ -1,4 +1,4 @@
-{% macro main_navigation(global) %}
+{% macro main_navigation() %}
 
     {# Prepare #}
     {% set isSite = global.location.site and not global.location.entityCategory %}
@@ -11,20 +11,22 @@
             {% if global.location.site %}
                 <div class="item"><i class="cubes icon"></i>Entities
                     <div class="menu">
-                        <a href="{{ global.urls.resolveSite(global.location.site) }}" class="item {% if isSite %}active{% endif %}">All</a>
+                        <a href="{{ global.urls.resolveSite(global.location.site) }}" class="item {% if global.urls.resolveSite(global.location.site).startsWith(request.url) %}active{% endif %}">All</a>
                         {% for entityCategory in global.entityCategories.getItems() %}
                             {% if entityCategory.isGlobal == false %}
-                                <a href="{{ global.urls.resolveEntityCategory(global.location.site, entityCategory) }}" class="item {% if isCategory and entityCategory == global.location.entityCategory %}active{% endif %}">
+                                <a href="{{ global.urls.resolveEntityCategory(global.location.site, entityCategory) }}" class="item {% if entityCategory and entityCategory.isEqualTo(global.location.entityCategory) %}active{% endif %}">
                                     {{ entityCategory.pluralName }}
                                 </a>
                             {% endif %}
                         {% endfor %}
                     </div>
                 </div>
-                <a class="item"><i class="bug icon"></i>Tests</a>
-                <a class="item"><i class="eyedropper icon"></i>Styleguide</a>
+                {% if global.navigation.site %}
+                    {% for item in global.navigation.site %}
+                        <a href="{{ item.link }}" class="item {% if item.link.startsWith(request.url) %}active{% endif %}"><i class="{{ item.icon }} icon"></i>{{ item.text }}</a>
+                    {% endfor %}
+                {% endif %}
             {% endif %}
-            <a class="item"><i class="file text outline icon"></i>Documentation</a>
         </div>
     </div>
 {% endmacro %}

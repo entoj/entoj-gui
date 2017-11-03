@@ -8,7 +8,7 @@
 {% block content %}
     <div class="sites">
         {% for site in global.sites.getItems() %}
-            {{ site_card(model=site, global=global) }}
+            {{ site_card(model=site) }}
         {% endfor %}
     </div>
 {% endblock %}

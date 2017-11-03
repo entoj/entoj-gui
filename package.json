@@ -2,11 +2,11 @@
   "name": "entoj-gui",
   "version": "0.1.4",
   "engines": {
-    "node": ">=4.x"
+    "node": ">=6.x"
   },
   "main": "source/index.js",
   "dependencies": {
-    "entoj-system": "^0.1.11"
+    "entoj-system": "^0.1.17"
   },
   "devDependencies": {
     "gulp": "*",

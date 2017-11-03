@@ -1,4 +1,4 @@
-{% macro entity_menu(global) %}
+{% macro entity_menu() %}
 
     {# Prepare #}
     {# Render #}
@@ -46,20 +46,16 @@
 {% endmacro %}
 
 
-{% macro entity_card(model, global) %}
+{% macro entity_card(model) %}
 
     {# Prepare #}
     {% set hasExamples = false %}
-    {% if model.id.category.longName == 'Page' %}
+    {% if model.id.category and model.id.category.longName == 'Page' %}
         {% set hasExamples = true %}
     {% else %}
-        {% if model.documentation.getByContentKind(global.kind.EXAMPLE)|length > 0 %}
+        {% if model.documentation.getByContentKind(ContentKind.EXAMPLE)|length > 0 %}
             {% set hasExamples = true %}
         {% endif %}
-    {% endif %}
-    {% set hasDatamodel = false %}
-    {% if model.documentation.getByContentKind(global.kind.DATAMODEL)|length > 0 %}
-        {% set hasDatamodel = true %}
     {% endif %}
     {% set state = model.properties.get('state') %}
 
@@ -86,9 +82,6 @@
             </div>
             <div class="buttons content">
                 <a href="{{ global.urls.resolveEntityId(model.id, '/documentation') }}" class="ui compact mini button">Docs</a>
-                {% if hasDatamodel %}
-                    <a href="{{ global.urls.resolveEntityId(model.id, '/datamodel/' + model.documentation.getFirstByContentKind(global.kind.DATAMODEL).file.basename) }}" class="ui compact mini button">Model</a>
-                {% endif %}
                 {% if hasExamples %}
                     <a href="{{ global.urls.resolveEntityId(model.id, '/examples') }}" class="ui compact mini blue button">Examples</a>
                 {% endif %}
@@ -98,7 +91,7 @@
 {% endmacro %}
 
 
-{% macro entity_category(model, global) %}
+{% macro entity_category(model) %}
 
     {# Prepare #}
     {% set entities = global.entities.getBySiteAndCategory(global.location.site, model) %}
@@ -109,7 +102,7 @@
             <div class="ui large header">{{ model.pluralName }}</div>
             <div class="items">
                 {% for entity in entities %}
-                    {{ entity_card(model=entity, global=global) }}
+                    {{ entity_card(model=entity) }}
                 {% endfor %}
             </div>
         </div>
