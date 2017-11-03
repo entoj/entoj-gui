@@ -12,7 +12,7 @@
 {% block content %}
     <div class="entities">
         {% if global.location.entityCategory.isGlobal == false %}
-            {{ entity_category(model=global.location.entityCategory, global=global) }}
+            {{ entity_category(model=global.location.entityCategory) }}
         {% endif %}
     </div>
 {% endblock %}

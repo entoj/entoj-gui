@@ -10,11 +10,6 @@
     <div class="navigation documentation active">
         <i class="file text outline icon"></i>
     </div>
-    {% if global.location.entity.documentation.getByContentKind(global.kind.DATAMODEL)|length > 0 %}
-    <a href="{{ global.urls.resolveEntityId(global.location.entity.id, '/datamodel/' + global.location.entity.documentation.getFirstByContentKind(global.kind.DATAMODEL).file.basename) }}" class="navigation datamodel" data-tooltip="Show datamodel" data-position="bottom left">
-        <i class="terminal icon"></i>
-    </a>
-    {% endif %}
 {% endblock %}
 {% block content %}
     {% set documentation = global.location.entity.properties.get('documentation') %}

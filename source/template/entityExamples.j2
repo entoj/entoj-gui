@@ -12,18 +12,12 @@
     <a class="navigation documentation" href="{{ global.urls.resolveEntityId(global.location.entity.id, '/documentation') }}" data-tooltip="Show documentation" data-position="bottom left">
         <i class="file text outline icon"></i>
     </a>
-    {% if global.location.entity.documentation.getByContentKind(global.kind.DATAMODEL)|length > 0 %}
-    <a href="{{ global.urls.resolveEntityId(global.location.entity.id, '/datamodel/' + global.location.entity.documentation.getFirstByContentKind(global.kind.DATAMODEL).file.basename ) }}" class="navigation datamodel" data-tooltip="Show datamodel" data-position="bottom left">
-        <i class="terminal icon"></i>
-    </a>
-    {% endif %}
-
     <div class="right menu">
         <select class="ui item example dropdown">
             {% if global.location.entity.id.category.longName == 'Page' %}
                 <option value="{{ global.urls.resolveEntityId(global.location.entity.id, '/' + global.location.entity.id.asString() + '.j2') }}">Page</option>
             {% else %}
-                {% for example in global.location.entity.documentation.getByContentKind(global.kind.EXAMPLE) %}
+                {% for example in global.location.entity.documentation.getByContentKind(ContentKind.EXAMPLE) %}
                     <option value="{{ global.urls.resolveEntityId(global.location.entity.id, '/examples/' + example.file.basename) }}">{{ example.name }}</option>
                 {% endfor %}
             {% endif %}
