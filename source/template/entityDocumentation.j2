@@ -17,7 +17,7 @@
         <iframe class="external documentation" src="{{ documentation.confluence }}"/>
     {% else %}
         <div class="internal documentation">
-            {{ global.location.entity.documentation.getFirstByType(global.type.DocumentationText)|markdown }}
+            {{ global.location.entity.documentation.getFirstByType(DocumentationType.TEXT)|markdown }}
         </div>
     {% endif %}
 {% endblock %}

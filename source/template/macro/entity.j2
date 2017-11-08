@@ -64,7 +64,7 @@
         <div class="ui raised card">
             <div class="content">
                 <div class="header">{{ model.idString }}</div>
-                <div class="description">{{ model.documentation.getFirstByType(global.type.DocumentationText).description|markdown }}</div>
+                <div class="description">{{ model.documentation.getFirstByType(DocumentationType.TEXT).description|markdown }}</div>
             </div>
             <div class="states content">
                 <div class="state concept {{ state.concept|default('')|lower }}">

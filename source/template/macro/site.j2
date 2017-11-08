@@ -7,7 +7,7 @@
         <div class="ui raised card">
             <div class="content">
                 <div class="header">{{ model.name }}</div>
-                <div class="description">{{ model.documentation.getFirstByType(global.type.DocumentationText).description|markdown }}</div>
+                <div class="description">{{ model.documentation.getFirstByType(DocumentationType.TEXT).description|markdown }}</div>
             </div>
             <div class="buttons content">
                 <a href="{{ global.urls.resolveSite(model) }}" class="ui compact mini blue button">Show</a>
