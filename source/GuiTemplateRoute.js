@@ -62,25 +62,25 @@ class GuiTemplateRoute extends BaseGuiTemplateRoute
      */
     static get className()
     {
-        return 'server.routes/GuiPagesRoute';
+        return 'server.routes/GuiTemplateRoute';
     }
 
 
     /**
      * @inheritDocs
      */
-    register(express)
+    register(server)
     {
-        const promise = super.register(express);
+        const promise = super.register(server);
         promise.then(() =>
         {
             // Add templates
-            this.addTemplateHandler('/', 'sites.j2');
-            this.addTemplateHandler('/:site', 'entityCategories.j2');
-            this.addTemplateHandler('/:site/:entityCategory', 'entityCategory.j2');
-            this.addTemplateHandler('/:site/:entityCategory/:entityId', 'entity.j2');
-            this.addTemplateHandler('/:site/:entityCategory/:entityId/examples', 'entityExamples.j2');
-            this.addTemplateHandler('/:site/:entityCategory/:entityId/documentation', 'entityDocumentation.j2');
+            this.addTemplateHandler('/', 'sites.j2', true);
+            this.addTemplateHandler('/:site', 'entityCategories.j2', true);
+            this.addTemplateHandler('/:site/:entityCategory', 'entityCategory.j2', true);
+            this.addTemplateHandler('/:site/:entityCategory/:entityId', 'entity.j2', true);
+            this.addTemplateHandler('/:site/:entityCategory/:entityId/examples', 'entityExamples.j2', true);
+            this.addTemplateHandler('/:site/:entityCategory/:entityId/documentation', 'entityDocumentation.j2', true);
 
             // Add static files
             const staticPath = (url) =>
