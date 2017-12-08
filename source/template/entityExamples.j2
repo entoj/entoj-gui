@@ -1,4 +1,5 @@
 {# Requirements #}
+{% from "macro/example.j2" import example_settings %}
 
 {# Render #}
 {% extends "./layout/default.j2" %}
@@ -13,7 +14,7 @@
         <i class="file text outline icon"></i>
     </a>
     <a class="navigation settings" data-tooltip="Configure example settings" data-position="bottom left">
-        <i class="file setting icon"></i>
+        <i class="setting icon"></i>
     </a>
     <div class="right menu">
         <select class="ui item example dropdown">
@@ -42,96 +43,8 @@
 {% endblock %}
 {% block content %}
     <iframe class="view" src="about:blank"></iframe>
-    <div class="ui modal settings">
-        <i class="close icon"></i>
-        <div class="header">
-            Settings
-        </div>
-        <form class="ui form content">
-            {% set settings = global.location.entity.properties.getByPath('examples.settings', []) %}
-            {% for setting in settings %}
-                <div class="field">
-                    <label>{{ setting.label }}</label>
-                    <div class="ui fluid single search normal selection dropdown">
-                        <input type="hidden" name="{{ setting.key }}">
-                        <i class="dropdown icon"></i>
-                        <div class="default text"></div>
-                        <div class="menu">
-                            {% for item in setting.items %}
-                                <div class="item" data-value="{{ item }}">{{ item }}</div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </form>
-      <div class="actions">
-        <div class="ui black deny button">
-          Cancel
-        </div>
-        <div class="ui positive right labeled icon button">
-          Apply
-          <i class="checkmark icon"></i>
-        </div>
-      </div>
-    </div>
+    {{ example_settings() }}
 {% endblock %}
 {% block bottom %}
-    <script>
-        $(document).ready(function()
-        {
-            $('select.dropdown').dropdown();
-
-            // Settings
-            $('.ui.normal.dropdown')
-                .dropdown(
-                {
-                    allowAdditions: true
-                });
-            $('.navigation.settings').on('click', function(e)
-            {
-                $('.ui.modal.settings').modal('show');
-            });
-            $('.ui.modal.settings')
-                .modal(
-                {
-                    onApprove: ($element) =>
-                    {
-                        var $form = $element.parents('.ui.modal').find('form');
-                        var data = $form.serializeArray();
-                        console.log($form.serialize(), data);
-                        $('iframe.view').attr('src', $('.dropdown.example select').val() + '?' + $form.serialize());
-                        return true;
-                    }
-                });
-
-            // Url
-            $('.dropdown.example select').on('change', function(e)
-            {
-                $('iframe.view').attr('src', $(this).val());
-            });
-
-            // Size
-            $('.dropdown.device select').on('change', function(e)
-            {
-                if (!$(this).val())
-                {
-                    $('iframe.view').css('width', '100%');
-                }
-                else
-                {
-                    $('iframe.view').css('width', $(this).val());
-                }
-            });
-
-            // Open
-            $('a.open').on('click', function(e)
-            {
-                window.open($('iframe.view').attr('src'));
-            });
-
-            // Open first url
-            $('.dropdown.example select').trigger('change');
-        });
-    </script>
+    <script src="/_/js/examples.js"></script>
 {% endblock %}

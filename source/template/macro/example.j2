@@ -1,0 +1,39 @@
+{% macro example_settings() %}
+
+    {# Prepare #}
+    {# Render #}
+    <div class="ui modal settings">
+        <i class="close icon"></i>
+        <div class="header">
+            Settings
+        </div>
+        <form class="ui form content">
+            {% set settings = global.location.entity.properties.getByPath('examples.settings', []) %}
+            {% for setting in settings %}
+                <div class="field">
+                    <label>{{ setting.label }}</label>
+                    <div class="ui fluid single search normal selection dropdown">
+                        <input type="hidden" name="{{ setting.key }}">
+                        <i class="dropdown icon"></i>
+                        <div class="default text"></div>
+                        <div class="menu">
+                            {% for item in setting.items %}
+                                <div class="item" data-value="{{ item }}">{{ item }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </form>
+      <div class="actions">
+        <div class="ui black deny button">
+          Cancel
+        </div>
+        <div class="ui positive right labeled icon button">
+          Apply
+          <i class="checkmark icon"></i>
+        </div>
+      </div>
+    </div>
+
+{% endmacro %}
