@@ -48,7 +48,7 @@
             Settings
         </div>
         <form class="ui form content">
-            {% set settings = global.location.entity.properties.getByPath('examples.overview.settings', []) %}
+            {% set settings = global.location.entity.properties.getByPath('examples.settings', []) %}
             {% for setting in settings %}
                 <div class="field">
                     <label>{{ setting.label }}</label>

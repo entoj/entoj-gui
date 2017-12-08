@@ -1,25 +1,29 @@
 'use strict';
 
+/**
+ * Requirements
+ * @ignore
+ */
 const GuiTemplateRoute = require('entoj-system').server.route.GuiTemplateRoute;
 
 
 /**
- * Storage
- *
- * @type {Object}
+ * Prepare storage for navigation entries
  */
-if (!GuiTemplateRoute.model)
-{
-    GuiTemplateRoute.model = {};
-}
 GuiTemplateRoute.model.navigation =
 {
-    site: [],
-    global: []
+    site: []
 };
 
 
-function addSiteNavigation(icon, text, link)
+/**
+ * Adds a navigation entry (displayed in the sidebar)
+ *
+ * @param {String} icon
+ * @param {String} text
+ * @param {String} link
+ */
+function add(icon, text, link)
 {
     GuiTemplateRoute.model.navigation.site.push(
     {
@@ -30,18 +34,6 @@ function addSiteNavigation(icon, text, link)
 }
 
 
-function addGlobalNavigation(icon, text, link)
-{
-    GuiTemplateRoute.model.navigation.global.push(
-    {
-        icon: icon,
-        text: text,
-        link: link
-    });
-}
-
-
 /**
  */
-module.exports.addSiteNavigation = addSiteNavigation;
-module.exports.addGlobalNavigation = addGlobalNavigation;
+module.exports.add = add;
