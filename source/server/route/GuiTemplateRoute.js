@@ -15,7 +15,7 @@ const SitesRepository = require('entoj-system').model.site.SitesRepository;
 const CliLogger = require('entoj-system').cli.CliLogger;
 const Environment = require('entoj-system').nunjucks.Environment;
 const path = require('path');
-const navigation = require('./navigation.js');
+const navigation = require('../../navigation.js');
 
 
 /**
@@ -39,7 +39,7 @@ class GuiTemplateRoute extends BaseGuiTemplateRoute
     {
         const options =
         {
-            templatePaths: path.resolve(__dirname + '/template'),
+            templatePaths: path.resolve(__dirname + '/../../template'),
             staticRoute: '/_'
         };
         super(cliLogger.createPrefixed('gui'), sitesRepository, entityCategoriesRepository, entitiesRepository, globalConfiguration,
@@ -62,7 +62,7 @@ class GuiTemplateRoute extends BaseGuiTemplateRoute
      */
     static get className()
     {
-        return 'server.routes/GuiTemplateRoute';
+        return 'server.route/GuiTemplateRoute';
     }
 
 
