@@ -6,7 +6,7 @@
   },
   "main": "source/index.js",
   "dependencies": {
-    "entoj-system": "^0.1.20"
+    "entoj-system": "^0.1.23"
   },
   "devDependencies": {
     "gulp": "*",

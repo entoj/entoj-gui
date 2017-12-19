@@ -23,17 +23,20 @@ GuiTemplateRoute.model.navigation =
  * @param {String} text
  * @param {String} link
  */
-function add(icon, text, link)
+function add(icon, text, link, children)
 {
     GuiTemplateRoute.model.navigation.site.push(
     {
         icon: icon,
         text: text,
-        link: link
+        link: link,
+        children: children
     });
 }
 
 
 /**
+ * Exports
+ * @ignore
  */
 module.exports.add = add;

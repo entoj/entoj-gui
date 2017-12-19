@@ -38,6 +38,7 @@ function register(configuration, options)
 module.exports =
 {
     register: register,
+    model: require('entoj-system').server.route.GuiTemplateRoute.model,
     templateRoot: require('path').resolve(__dirname + '/template'),
     navigation: require('./navigation.js'),
     nunjucks: require('./nunjucks/index.js'),
