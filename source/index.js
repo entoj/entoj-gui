@@ -42,5 +42,6 @@ module.exports =
     templateRoot: require('path').resolve(__dirname + '/template'),
     navigation: require('./navigation.js'),
     nunjucks: require('./nunjucks/index.js'),
-    server: require('./server/index.js')
+    server: require('./server/index.js'),
+    settings: require('./settings.js'),    
 };

@@ -7,42 +7,44 @@
         <input type="text" placeholder="Search entity...">
         <i class="search icon"></i>
     </div>
-    <div class="item seperator"></div>
-    <a class="pointing browse item">
-        States
-        <i class="dropdown icon"></i>
-    </a>
-    <div class="ui flowing basic state popup">
-        <div class="ui three column relaxed divided grid">
-            <div class="column">
-                <h4 class="ui header">Concept</h4>
-                <div class="ui mini link concept list">
-                    <a class="item selected">None</a>
-                    <a class="item selected">Progress</a>
-                    <a class="item selected">Review</a>
-                    <a class="item selected">Done</a>
+    <div class="item seperator"></div>    
+    {% if global.settings.showStatus %}            
+        <a class="pointing browse item">
+            States
+            <i class="dropdown icon"></i>
+        </a>
+        <div class="ui flowing basic state popup">
+            <div class="ui three column relaxed divided grid">
+                <div class="column">
+                    <h4 class="ui header">Concept</h4>
+                    <div class="ui mini link concept list">
+                        <a class="item selected">None</a>
+                        <a class="item selected">Progress</a>
+                        <a class="item selected">Review</a>
+                        <a class="item selected">Done</a>
+                    </div>
                 </div>
-            </div>
-            <div class="column">
-                <h4 class="ui header">Frontend</h4>
-                <div class="ui mini link frontend list">
-                    <a class="item selected">None</a>
-                    <a class="item selected">Progress</a>
-                    <a class="item selected">Review</a>
-                    <a class="item selected">Done</a>
+                <div class="column">
+                    <h4 class="ui header">Frontend</h4>
+                    <div class="ui mini link frontend list">
+                        <a class="item selected">None</a>
+                        <a class="item selected">Progress</a>
+                        <a class="item selected">Review</a>
+                        <a class="item selected">Done</a>
+                    </div>
                 </div>
-            </div>
-            <div class="column">
-                <h4 class="ui mini header">Integration</h4>
-                <div class="ui mini link integration list">
-                    <a class="item selected">None</a>
-                    <a class="item selected">Progress</a>
-                    <a class="item selected">Review</a>
-                    <a class="item selected">Done</a>
+                <div class="column">
+                    <h4 class="ui mini header">Integration</h4>
+                    <div class="ui mini link integration list">
+                        <a class="item selected">None</a>
+                        <a class="item selected">Progress</a>
+                        <a class="item selected">Review</a>
+                        <a class="item selected">Done</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 
 {% endmacro %}
 
@@ -67,20 +69,22 @@
                 <div class="header">{{ model.idString }}</div>
                 <div class="description">{{ model.documentation.getFirstByType(DocumentationType.TEXT).description|markdown }}</div>
             </div>
-            <div class="states content">
-                <div class="state concept {{ state.concept|default('')|lower }}">
-                    <span class="name">Konzept</span>
-                    <span class="value">{{ state.concept|default('None') }}</span>
+            {% if global.settings.showStatus %}
+                <div class="states content">
+                    <div class="state concept {{ state.concept|default('Done')|lower }}">
+                        <span class="name">Konzept</span>
+                        <span class="value">{{ state.concept|default('Done') }}</span>
+                    </div>
+                    <div class="state frontend {{ state.frontend|default('Done')|lower }}">
+                        <span class="name">Frontend</span>
+                        <span class="value">{{ state.frontend|default('Done') }}</span>
+                    </div>
+                    <div class="state integration {{ state.integration|default('Done')|lower }}">
+                        <span class="name">Integration</span>
+                        <span class="value">{{ state.integration|default('Done') }}</span>
+                    </div>
                 </div>
-                <div class="state frontend {{ state.frontend|default('')|lower }}">
-                    <span class="name">Frontend</span>
-                    <span class="value">{{ state.frontend|default('None') }}</span>
-                </div>
-                <div class="state integration {{ state.integration|default('')|lower }}">
-                    <span class="name">Integration</span>
-                    <span class="value">{{ state.integration|default('None') }}</span>
-                </div>
-            </div>
+            {% endif %}
             <div class="buttons content">
                 <a href="{{ global.urls.resolveEntityId(model.id, '/documentation') }}" class="ui compact mini button">Docs</a>
                 {% if hasExamples %}
