@@ -8,6 +8,15 @@
     <div class="ui left fixed vertical inverted main-navigation menu">
         <h1 class="project">entoj</h1>
         <div class="items">
+            <div class="item active"><i class="sitemap icon"></i>Sites
+                <div class="menu">
+                    {% for site in global.sites.getItems() %}
+                        <a href="{{ global.urls.resolveSite(site) }}" class="item {% if site and site.isEqualTo(global.location.site) %}active{% endif %}">
+                            {{ site.name }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>        
             {% if global.location.site %}
                 <div class="item {% if request.url.startsWith(global.urls.resolveSite(global.location.site)) %}active{% endif %}"><i class="cubes icon"></i>Entities
                     <div class="menu">
