@@ -93,4 +93,15 @@
     {
         updateSearch();
     });
+
+
+    // Linter
+    $('[data-popup-id]').each(function (index, element)
+    {
+        $this = $(this);
+        $this.popup(
+            {
+                popup: '#' + $this.data('popup-id')
+            });
+    });
 })();

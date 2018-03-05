@@ -7,8 +7,8 @@
         <input type="text" placeholder="Search entity...">
         <i class="search icon"></i>
     </div>
-    <div class="item seperator"></div>    
-    {% if global.settings.showStatus %}            
+    <div class="item seperator"></div>
+    {% if global.settings.showStatus %}
         <a class="pointing browse item">
             States
             <i class="dropdown icon"></i>
@@ -63,12 +63,42 @@
     {% set state = model.properties.get('state') %}
 
     {# Render #}
+    {% if model.lintResults.success == false %}
+        <div class="ui popup" id="card-{{ model.idString }}" style="width: 50vw;">
+            <div class="header">Found Problems</div>
+            <div class="content">
+                {% for lintResult in model.lintResults %}
+                    {% if not lintResult.success %}
+                        <span class="ui gray mini label">{{ lintResult.linter }}: {{ lintResult.warningCount }} / {{ lintResult.errorCount }}</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
     <div class="entity type-{{ model.id.category.shortName }}">
         <div class="ui raised card">
             <div class="content">
+                {% if model.lintResults.success == false %}
+                    <div class="ui orange right corner linter label" data-popup-id="card-{{ model.idString }}">
+                        <i class="exclamation triangle icon"></i>
+                    </div>
+                {% endif %}
                 <div class="header">{{ model.idString }}</div>
                 <div class="description">{{ model.documentation.getFirstByType(DocumentationType.TEXT).description|markdown }}</div>
             </div>
+            <!--
+            <div class="extends content">
+                <div class="parent">
+                    <span class="name">extends</span>
+                    <span class="value">Base</span>
+                </div>
+                <div class="parts">
+                    <span class="ui light-gray mini label">css</span>
+                    <span class="ui gray mini label">js</span>
+                    <span class="ui light-gray mini label">jinja</span>
+                </div>
+            </div>
+            -->
             {% if global.settings.showStatus %}
                 <div class="states content">
                     <div class="state concept {{ state.concept|default('Done')|lower }}">
