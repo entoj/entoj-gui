@@ -24,10 +24,7 @@ const config =
 }
 
 
-/**
- * Compile scss files
- */
-gulp.task('scss', function ()
+function scss()
 {
     const sassOptions =
     {
@@ -41,10 +38,15 @@ gulp.task('scss', function ()
         .pipe(autoprefixer())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(config.css));
-});
+}
+
+/**
+ * Compile scss files
+ */
+gulp.task('scss', scss);
 
 gulp.task('scss-watch', function()
 {
     return gulp
-        .watch(config.scss + '/**/*.scss', ['scss']);
+        .watch(config.scss + '/**/*.scss', scss);
 });
