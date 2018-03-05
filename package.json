@@ -5,14 +5,17 @@
     "node": ">=6.x"
   },
   "main": "source/index.js",
+  "scripts": {
+    "start": "gulp scss-watch"
+  },
   "dependencies": {
     "entoj-system": "^0.2.20"
   },
   "devDependencies": {
     "gulp": "^4.0.0",
-    "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "^2.6.3",
     "gulp-autoprefixer": "^4.1.0",
-    "semantic-ui": "^2.2.13"
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "semantic-ui": "^2.3.0"
   }
 }
