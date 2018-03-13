@@ -51,8 +51,6 @@ $(function()
         window.open($('iframe.view').attr('src'));
     });
 
-console.log('Opening change....');
-
     // Open first url
     $('.dropdown.example select').trigger('change');
 });
