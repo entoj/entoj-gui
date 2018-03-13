@@ -12,16 +12,20 @@
             {% for setting in settings %}
                 <div class="field">
                     <label>{{ setting.label }}</label>
-                    <div class="ui fluid single search normal selection dropdown">
-                        <input type="hidden" name="{{ setting.key }}">
-                        <i class="dropdown icon"></i>
-                        <div class="default text"></div>
-                        <div class="menu">
-                            {% for item in setting.items %}
-                                <div class="item" data-value="{{ item }}">{{ item }}</div>
-                            {% endfor %}
+                    {% if setting.type == 'dropdown' %}
+                        <div class="ui fluid single search normal selection dropdown">
+                            <input type="hidden" name="{{ setting.key }}">
+                            <i class="dropdown icon"></i>
+                            <div class="default text"></div>
+                            <div class="menu">
+                                {% for item in setting.items %}
+                                    <div class="item" data-value="{{ item }}">{{ item }}</div>
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
+                    {% else %}
+                        <h1>Not Implemented</h1>
+                    {% endif %}
                 </div>
             {% endfor %}
         </form>
