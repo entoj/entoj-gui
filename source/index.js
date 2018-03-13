@@ -28,6 +28,12 @@ function register(configuration, options)
                 ]
             }
         });
+
+    // Update options
+    if (options)
+    {
+        require('./settings.js').update(options);
+    }
 }
 
 
@@ -43,5 +49,5 @@ module.exports =
     navigation: require('./navigation.js'),
     nunjucks: require('./nunjucks/index.js'),
     server: require('./server/index.js'),
-    settings: require('./settings.js'),    
+    settings: require('./settings.js'),
 };

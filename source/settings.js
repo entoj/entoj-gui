@@ -12,7 +12,9 @@ const GuiTemplateRoute = require('entoj-system').server.route.GuiTemplateRoute;
  */
 GuiTemplateRoute.model.settings =
 {
-    showStatus: true
+    showStatus: false,
+    showLinterResults: false,
+    showExtends: false
 };
 
 
@@ -34,7 +36,22 @@ function set(name, value)
 
 
 /**
+ * Updates settings
+ *
+ * @param {Object} values
+ */
+function update(values)
+{
+    for (const key in values)
+    {
+        set(key, values[key]);
+    }
+}
+
+
+/**
  * Exports
  * @ignore
  */
 module.exports.set = set;
+module.exports.update = update;
