@@ -81,16 +81,13 @@
                     {
                         font-size: 80%;
                         font-weight: bold;
-                        display: block;
                         line-height: 1;
                         padding-bottom: 2px;
-                        text-align: center;
                     }
 
                     .name
                     {
                         font-size: 70%;
-                        display: block;
                         line-height: 1;
                         text-align: center;
                     }
@@ -99,14 +96,13 @@
                 .parts
                 {
                     flex: 1;
-                    background-color: white;
                     padding: 3px 8px;
 
                     .label
                     {
                         text-transform: uppercase;
 
-                        &.light-gray
+                        &.light-grey
                         {
                             background-color: #FBFBFB;
                         }

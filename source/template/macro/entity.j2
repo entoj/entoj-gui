@@ -78,7 +78,7 @@
     <div class="entity type-{{ model.id.category.shortName }}">
         <div class="ui raised card">
             <div class="content">
-                {% if model.lintResults.success == false %}
+                {% if global.settings.showLinterResults and model.lintResults.success == false %}
                     <div class="ui orange right corner linter label" data-popup-id="card-{{ model.idString }}">
                         <i class="exclamation triangle icon"></i>
                     </div>
@@ -86,19 +86,6 @@
                 <div class="header">{{ model.idString }}</div>
                 <div class="description">{{ model.documentation.getFirstByType(DocumentationType.TEXT).description|markdown }}</div>
             </div>
-            <!--
-            <div class="extends content">
-                <div class="parent">
-                    <span class="name">extends</span>
-                    <span class="value">Base</span>
-                </div>
-                <div class="parts">
-                    <span class="ui light-gray mini label">css</span>
-                    <span class="ui gray mini label">js</span>
-                    <span class="ui light-gray mini label">jinja</span>
-                </div>
-            </div>
-            -->
             {% if global.settings.showStatus %}
                 <div class="states content">
                     <div class="state concept {{ state.concept|default('Done')|lower }}">
@@ -112,6 +99,19 @@
                     <div class="state integration {{ state.integration|default('Done')|lower }}">
                         <span class="name">Integration</span>
                         <span class="value">{{ state.integration|default('Done') }}</span>
+                    </div>
+                </div>
+            {% endif %}
+            {% if global.settings.showExtends and model.site.extends %}
+                <div class="extends content">
+                    <div class="parent">
+                        <span class="name">extends</span>
+                        <span class="value">{{ model.site.extends.name }}</span>
+                    </div>
+                    <div class="parts">
+                        <span class="ui {{ 'grey' if model.hasOwnContentOfKind(ContentKind.CSS) else 'light-grey' }} mini label">css</span>
+                        <span class="ui {{ 'grey' if model.hasOwnContentOfKind(ContentKind.JS) else 'light-grey' }} mini label">js</span>
+                        <span class="ui {{ 'grey' if model.hasOwnContentOfKind(ContentKind.MACRO) else 'light-grey' }} mini label">jinja</span>
                     </div>
                 </div>
             {% endif %}
