@@ -12,17 +12,18 @@
             {% for setting in settings %}
                 <div class="field">
                     <label>{{ setting.label }}</label>
-                    {% if setting.type == 'dropdown' %}
-                        <div class="ui fluid single search normal selection dropdown">
-                            <input type="hidden" name="{{ setting.key }}">
-                            <i class="dropdown icon"></i>
-                            <div class="default text"></div>
-                            <div class="menu">
-                                {% for item in setting.items %}
-                                    <div class="item" data-value="{{ item }}">{{ item }}</div>
-                                {% endfor %}
-                            </div>
-                        </div>
+                    {% if setting.type == 'select' %}
+                        <select class="ui fluid single select dropdown" name="{{ setting.name }}">
+                            {% for item in setting.items %}
+                                <option value="{{ item }}" {{ "selected" if item == setting.default }}>{{ item }}</div>
+                            {% endfor %}
+                        </select>
+                    {% elif setting.type == 'autocomplete' %}
+                        <select class="ui fluid single search selection dropdown" name="{{ setting.name }}">
+                            {% for item in setting.items %}
+                                <option value="{{ item }}" {{ "selected" if item == setting.default }}>{{ item }}</div>
+                            {% endfor %}
+                        </select>
                     {% else %}
                         <h1>Not Implemented</h1>
                     {% endif %}

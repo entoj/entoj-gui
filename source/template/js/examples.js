@@ -4,12 +4,16 @@ $(function()
     $('select.dropdown').dropdown();
 
     // Example settings
-    $('.ui.normal.dropdown')
+    $('.ui.search.dropdown')
         .dropdown(
         {
             allowAdditions: true
         });
-    $('.navigation.settings').on('click', function(e)
+    $('.ui.select.dropdown')
+        .dropdown(
+        {
+        });
+    $('.ui.item.settings').on('click', function(e)
     {
         $('.ui.modal.settings').modal('show');
     });
@@ -20,8 +24,9 @@ $(function()
             {
                 var $form = $element.parents('.ui.modal').find('form');
                 var data = $form.serializeArray();
-                console.log($form.serialize(), data);
-                $('iframe.view').attr('src', $('.dropdown.example select').val() + '?' + $form.serialize());
+                var url = new URL('https://localhost:3000' + $('iframe.view').attr('src'));
+                url.search = '?' + $form.serialize();
+                $('iframe.view').attr('src', url.toString());
                 return true;
             }
         });

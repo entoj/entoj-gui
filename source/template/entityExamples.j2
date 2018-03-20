@@ -1,6 +1,26 @@
 {# Requirements #}
 {% from "macro/example.j2" import example_settings %}
 
+{# Prepare #}
+{% if global.location.entity.id.category.longName == 'Page' %}
+    {% set examples = [
+        {
+            label: 'Page',
+            url: global.urls.resolveEntityId(global.location.entity.id, '/' + global.location.entity.id.asString() + '.j2')
+        }
+    ] %}
+{% else %}
+    {% set examples = [] %}
+    {% for example in global.location.entity.documentation.getByContentKind(ContentKind.EXAMPLE) %}
+        {{ examples.push(
+            {
+                label: example.name,
+                url: global.urls.resolveEntityId(global.location.entity.id, '/examples/' + example.file.basename)
+            }
+        ) }}
+    {% endfor %}
+{% endif %}
+
 {# Render #}
 {% extends "./layout/default.j2" %}
 
@@ -13,19 +33,18 @@
     <a class="navigation documentation" href="{{ global.urls.resolveEntityId(global.location.entity.id, '/documentation') }}" data-tooltip="Show documentation" data-position="bottom left">
         <i class="file text outline icon"></i>
     </a>
-    <a class="navigation settings" data-tooltip="Configure example settings" data-position="bottom left">
-        <i class="setting icon"></i>
-    </a>
     <div class="right menu">
-        <select class="ui item example dropdown">
-            {% if global.location.entity.id.category.longName == 'Page' %}
-                <option value="{{ global.urls.resolveEntityId(global.location.entity.id, '/' + global.location.entity.id.asString() + '.j2') }}">Page</option>
-            {% else %}
-                {% for example in global.location.entity.documentation.getByContentKind(ContentKind.EXAMPLE) %}
-                    <option value="{{ global.urls.resolveEntityId(global.location.entity.id, '/examples/' + example.file.basename) }}">{{ example.name }}</option>
+        <a class="ui item settings" data-tooltip="Configure example settings" data-position="bottom right">
+            <i class="setting icon"></i>Settings
+        </a>
+
+        {% if examples|length > 1 %}
+            <select class="ui item example dropdown">
+                {% for example in examples %}
+                    <option value="{{ example.url }}">{{ example.label }}</option>
                 {% endfor %}
-            {% endif %}
-        </select>
+            </select>
+        {% endif %}
 
         <select class="ui item device dropdown">
             <option value="100%">Full</option>
@@ -42,7 +61,7 @@
     </div>
 {% endblock %}
 {% block content %}
-    <iframe class="view" src="about:blank"></iframe>
+    <iframe class="view" src="{{ examples[0].url }}"></iframe>
     {{ example_settings() }}
 {% endblock %}
 {% block bottom %}

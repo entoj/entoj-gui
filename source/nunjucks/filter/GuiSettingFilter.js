@@ -77,7 +77,7 @@ class GuiSettingFilter extends Filter
             }
 
             // Get current value
-            const result = request.query[setting.key] || setting.default;
+            const result = request.query[setting.name] || setting.default;
             return result;
         };
     }
