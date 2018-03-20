@@ -104,4 +104,15 @@
                 popup: '#' + $this.data('popup-id')
             });
     });
+
+    $('.ui.modal').modal();
+    $('.ui.menu .item').tab();
+    $('[data-modal-id]').each(function (index, element)
+    {
+        $this = $(this);
+        $this.on('click', () =>
+            {
+                $('#' + $this.data('modal-id')).modal('show');
+            });
+    });
 })();

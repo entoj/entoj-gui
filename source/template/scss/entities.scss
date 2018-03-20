@@ -69,43 +69,15 @@
             .extends.content
             {
                 background-color: #F5F5F5;
-                padding: 0;
-                display: flex;
+                padding: 4px 8px;
 
-                .parent
+                .label
                 {
-                    display: inline-block;
-                    padding: 4px 8px;
+                    text-transform: uppercase;
 
-                    .value
+                    &.light-grey
                     {
-                        font-size: 80%;
-                        font-weight: bold;
-                        line-height: 1;
-                        padding-bottom: 2px;
-                    }
-
-                    .name
-                    {
-                        font-size: 70%;
-                        line-height: 1;
-                        text-align: center;
-                    }
-                }
-
-                .parts
-                {
-                    flex: 1;
-                    padding: 3px 8px;
-
-                    .label
-                    {
-                        text-transform: uppercase;
-
-                        &.light-grey
-                        {
-                            background-color: #FBFBFB;
-                        }
+                        background-color: #FBFBFB;
                     }
                 }
             }
