@@ -24,7 +24,12 @@ $(function()
             {
                 var $form = $element.parents('.ui.modal').find('form');
                 var data = $form.serializeArray();
-                var url = new URL('https://localhost:3000' + $('iframe.view').attr('src'));
+                var src  = $('iframe.view').attr('src');
+                if (!src.startsWith('http'))
+                {
+                    src = window.document.location.protocol + window.document.location.host + src;
+                }
+                var url = new URL(src);
                 url.search = '?' + $form.serialize();
                 $('iframe.view').attr('src', url.toString());
                 return true;
