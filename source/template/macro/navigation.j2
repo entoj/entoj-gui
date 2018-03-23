@@ -16,11 +16,11 @@
                         </a>
                     {% endfor %}
                 </div>
-            </div>        
+            </div>
             {% if global.location.site %}
                 <div class="item {% if request.url.startsWith(global.urls.resolveSite(global.location.site)) %}active{% endif %}"><i class="cubes icon"></i>Entities
                     <div class="menu">
-                        <a href="{{ global.urls.resolveSite(global.location.site) }}" class="item {% if request.url.startsWith(global.urls.resolveSite(global.location.site)) %}active{% endif %}">All</a>
+                        <a href="{{ global.urls.resolveSite(global.location.site) }}" class="item {% if request.url == global.urls.resolveSite(global.location.site) %}active{% endif %}">All</a>
                         {% for entityCategory in global.entityCategories.getItems() %}
                             {% if entityCategory.isGlobal == false %}
                                 <a href="{{ global.urls.resolveEntityCategory(global.location.site, entityCategory) }}" class="item {% if entityCategory and entityCategory.isEqualTo(global.location.entityCategory) %}active{% endif %}">
