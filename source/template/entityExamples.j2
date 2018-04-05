@@ -61,7 +61,7 @@
     </div>
 {% endblock %}
 {% block content %}
-    <iframe class="view" src="{{ examples[0].url }}"></iframe>
+    <iframe class="view" src="{{ examples[0].url|guiSettings(global.location.entity) }}"></iframe>
     {{ example_settings() }}
 {% endblock %}
 {% block bottom %}

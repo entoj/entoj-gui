@@ -10,7 +10,8 @@ function register(configuration, options)
         {
             '!filters':
             [
-                require('./nunjucks/index.js').filter.GuiSettingFilter
+                require('./nunjucks/index.js').filter.GuiSettingFilter,
+                require('./nunjucks/index.js').filter.GuiSettingsFilter
             ]
         }
     );
