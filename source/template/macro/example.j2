@@ -24,6 +24,10 @@
                                 <option value="{{ item }}" {{ "selected" if item == setting.default }}>{{ item }}</div>
                             {% endfor %}
                         </select>
+                    {% elif setting.type == 'input' %}
+                        <div class="ui input">
+                            <input type="text" name="{{ setting.name }}" value="{{ setting.default  }}">
+                        </div>
                     {% else %}
                         <h1>Not Implemented</h1>
                     {% endif %}
