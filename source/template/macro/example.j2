@@ -14,14 +14,26 @@
                     <label>{{ setting.label }}</label>
                     {% if setting.type == 'select' %}
                         <select class="ui fluid single select dropdown" name="{{ setting.name }}">
+                            {% if (setting.allowEmpty == true) %}
+                                <option></option>
+                            {% endif %}
                             {% for item in setting.items %}
-                                <option value="{{ item }}" {{ "selected" if item == setting.default }}>{{ item }}</div>
+                                <option value="{{ item.value|default(item) }}" {{ "selected" if item.value|default(item) == setting.default }}>{{ item.label|default(item) }}</div>
                             {% endfor %}
                         </select>
                     {% elif setting.type == 'autocomplete' %}
                         <select class="ui fluid single search selection dropdown" name="{{ setting.name }}">
-                            {% for item in setting.items %}
-                                <option value="{{ item }}" {{ "selected" if item == setting.default }}>{{ item }}</div>
+                            {% if (setting.allowEmpty == true) %}
+                                <option></option>
+                            {% endif %}
+                            {% set items = [] %}
+                            {% if setting.items %}
+                                {% set items = setting.items %}
+                            {% elseif setting.settings %}
+                                {% set items = setting.settings|settings %}
+                            {% endif %}
+                            {% for item in items %}
+                                <option value="{{ item.value|default(item) }}" {{ "selected" if item.value|default(item) == setting.default }}>{{ item.label|default(item) }}</div>
                             {% endfor %}
                         </select>
                     {% elif setting.type == 'input' %}

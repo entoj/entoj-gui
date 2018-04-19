@@ -50,7 +50,7 @@ class GuiSettingFilter extends Filter
                 : false;
             if (!request)
             {
-                return false;
+                return undefined;
             }
 
             // Get the current entity
@@ -59,21 +59,21 @@ class GuiSettingFilter extends Filter
                 : false;
             if (!entity)
             {
-                return false;
+                return undefined;
             }
 
             // Get settings
             const settings = entity.properties.getByPath('examples.settings', []);
             if (!settings.length)
             {
-                return false;
+                return undefined;
             }
 
             // Get setting
             const setting = settings.find((item) => item.name == value);
             if (!setting)
             {
-                return false;
+                return undefined;
             }
 
             // Get current value

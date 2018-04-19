@@ -20,7 +20,7 @@ $(function()
     $('.ui.modal.settings')
         .modal(
         {
-            onApprove: ($element) =>
+            onApprove: function($element)
             {
                 var $form = $element.parents('.ui.modal').find('form');
                 var data = $form.serializeArray();
