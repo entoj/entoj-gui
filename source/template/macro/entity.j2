@@ -15,33 +15,17 @@
         </a>
         <div class="ui flowing basic state popup">
             <div class="ui three column relaxed divided grid">
-                <div class="column">
-                    <h4 class="ui header">Concept</h4>
-                    <div class="ui mini link concept list">
-                        <a class="item selected">None</a>
-                        <a class="item selected">Progress</a>
-                        <a class="item selected">Review</a>
-                        <a class="item selected">Done</a>
+                {% for status in global.settings.status %}
+                    <div class="column">
+                        <h4 class="ui header">status</h4>
+                        <div class="ui mini link {{ status }} list">
+                            <a class="item selected">None</a>
+                            <a class="item selected">Progress</a>
+                            <a class="item selected">Review</a>
+                            <a class="item selected">Done</a>
+                        </div>
                     </div>
-                </div>
-                <div class="column">
-                    <h4 class="ui header">Frontend</h4>
-                    <div class="ui mini link frontend list">
-                        <a class="item selected">None</a>
-                        <a class="item selected">Progress</a>
-                        <a class="item selected">Review</a>
-                        <a class="item selected">Done</a>
-                    </div>
-                </div>
-                <div class="column">
-                    <h4 class="ui mini header">Integration</h4>
-                    <div class="ui mini link integration list">
-                        <a class="item selected">None</a>
-                        <a class="item selected">Progress</a>
-                        <a class="item selected">Review</a>
-                        <a class="item selected">Done</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     {% endif %}
@@ -130,18 +114,12 @@
             {% endif %}
             {% if global.settings.showStatus %}
                 <div class="states content">
-                    <div class="state concept {{ state.concept|default('Done')|lower }}">
-                        <span class="name">Konzept</span>
-                        <span class="value">{{ state.concept|default('Done') }}</span>
-                    </div>
-                    <div class="state frontend {{ state.frontend|default('Done')|lower }}">
-                        <span class="name">Frontend</span>
-                        <span class="value">{{ state.frontend|default('Done') }}</span>
-                    </div>
-                    <div class="state integration {{ state.integration|default('Done')|lower }}">
-                        <span class="name">Integration</span>
-                        <span class="value">{{ state.integration|default('Done') }}</span>
-                    </div>
+                    {% for status in global.settings.status %}
+                        <div class="state {{ status }} {{ state|get(status)|default('None')|lower }}">
+                            <span class="name">{{ status }}</span>
+                            <span class="value">{{ state|get(status)|default('None') }}</span>
+                        </div>
+                    {% endfor %}
                 </div>
             {% endif %}
             <div class="buttons content">

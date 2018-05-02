@@ -13,6 +13,7 @@ const GuiTemplateRoute = require('entoj-system').server.route.GuiTemplateRoute;
 GuiTemplateRoute.model.settings =
 {
     showStatus: false,
+    status: ['Concept', 'Frontend', 'Integration'],
     showLinterResults: false,
     showExtends: false
 };
