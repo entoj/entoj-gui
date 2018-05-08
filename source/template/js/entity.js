@@ -46,6 +46,7 @@
             var stateMatches = (states.concept.indexOf($entity.find('.state.concept .value').text().toLowerCase()) !== -1) &&
                 (states.frontend.indexOf($entity.find('.state.frontend .value').text().toLowerCase()) !== -1) &&
                 (states.integration.indexOf($entity.find('.state.integration .value').text().toLowerCase()) !== -1);
+            stateMatches = true;
 
             // Show / Hide entities
             if (textMatches && stateMatches)

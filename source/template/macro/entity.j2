@@ -115,9 +115,12 @@
             {% if global.settings.showStatus %}
                 <div class="states content">
                     {% for status in global.settings.status %}
-                        <div class="state {{ status }} {{ state|get(status)|default('None')|lower }}">
-                            <span class="name">{{ status }}</span>
-                            <span class="value">{{ state|get(status)|default('None') }}</span>
+                        {% set name = status.value|default(status)|default('none')|lower %}
+                        {% set label = status.label|default(status)|default('None') %}
+                        {% set value = state|get(name)|default('None')|lower %}
+                        <div class="state {{ name }} {{ value }}">
+                            <span class="name">{{ label }}</span>
+                            <span class="value">{{ value }}</span>
                         </div>
                     {% endfor %}
                 </div>
