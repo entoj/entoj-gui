@@ -36,13 +36,11 @@
 {% macro entity_card(model) %}
 
     {# Prepare #}
-    {% set hasExamples = false %}
+    {% set examplesCount = 0 %}
     {% if model.id.category and model.id.category.longName == 'Page' %}
-        {% set hasExamples = true %}
+        {% set examplesCount = 1 %}
     {% else %}
-        {% if model.documentation.getByContentKind(ContentKind.EXAMPLE)|length > 0 %}
-            {% set hasExamples = true %}
-        {% endif %}
+        {% set examplesCount = model.documentation.getByContentKind(ContentKind.EXAMPLE)|length %}
     {% endif %}
     {% set state = model.properties.get('state') %}
 
@@ -118,7 +116,7 @@
                         {% set name = status.value|default(status)|default('none')|lower %}
                         {% set label = status.label|default(status)|default('None') %}
                         {% set value = state|get(name)|default('None')|lower %}
-                        <div class="state {{ name }} {{ value }}">
+                        <div class="state state-{{ name }} {{ value }}">
                             <span class="name">{{ label }}</span>
                             <span class="value">{{ value }}</span>
                         </div>
@@ -127,8 +125,8 @@
             {% endif %}
             <div class="buttons content">
                 <a href="{{ global.urls.resolveEntityId(model.id, '/documentation') }}" class="ui compact mini button">Docs</a>
-                {% if hasExamples %}
-                    <a href="{{ global.urls.resolveEntityId(model.id, '/examples') }}" class="ui compact mini blue button">Examples</a>
+                {% if examplesCount > 0 %}
+                    <a href="{{ global.urls.resolveEntityId(model.id, '/examples') }}" class="ui compact mini blue button">{{ 'Show' if model.id.category.type == 'page' else 'Examples' }}</a>
                 {% endif %}
             </div>
         </div>
