@@ -20,6 +20,7 @@
         ) }}
     {% endfor %}
 {% endif %}
+{% set documentation = global.location.entity.properties.get('documentation') %}
 
 {# Render #}
 {% extends "./layout/default.j2" %}
@@ -30,9 +31,15 @@
     <div class="navigation examples active">
         <i class="desktop icon"></i>
     </div>
-    <a class="navigation documentation" href="{{ global.urls.resolveEntityId(global.location.entity.id, '/documentation') }}" data-tooltip="Show documentation" data-position="bottom left">
-        <i class="file text outline icon"></i>
-    </a>
+    {% if documentation and documentation.confluence %}
+        <a class="navigation documentation" href="{{ documentation.confluence }}" target="_blank" data-tooltip="Show documentation in confluence" data-position="bottom left">
+            <i class="newspaper icon"></i>
+        </a>
+    {% else %}
+        <a class="navigation documentation" href="{{ global.urls.resolveEntityId(global.location.entity.id, '/documentation') }}" data-tooltip="Show documentation" data-position="bottom left">
+            <i class="file text outline icon"></i>
+        </a>
+    {% endif %}
     <div class="right menu">
         <a class="ui item settings" data-tooltip="Configure example settings" data-position="bottom right">
             <i class="setting icon"></i>Settings
