@@ -43,6 +43,7 @@
         {% set examplesCount = model.documentation.getByContentKind(ContentKind.EXAMPLE)|length %}
     {% endif %}
     {% set state = model.properties.get('state') %}
+    {% set documentation = model.properties.get('documentation') %}
 
     {# Render #}
     <div class="entity type-{{ model.id.category.shortName }}">
@@ -124,7 +125,11 @@
                 </div>
             {% endif %}
             <div class="buttons content">
-                <a href="{{ global.urls.resolveEntityId(model.id, '/documentation') }}" class="ui compact mini button">Docs</a>
+                {% if documentation and documentation.confluence %}
+                    <a href="{{ documentation.confluence }}" target="_blank" class="ui compact mini button">Docs</a>
+                {% else %}
+                    <a href="{{ global.urls.resolveEntityId(model.id, '/documentation') }}" class="ui compact mini button">Docs</a>
+                {% endif %}
                 {% if examplesCount > 0 %}
                     <a href="{{ global.urls.resolveEntityId(model.id, '/examples') }}" class="ui compact mini blue button">{{ 'Show' if model.id.category.type == 'page' else 'Examples' }}</a>
                 {% endif %}
